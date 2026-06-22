@@ -127,6 +127,30 @@ textarea.form-control{resize:vertical}
 .phase-bar-fill{height:100%;border-radius:20px;display:flex;align-items:center;padding-left:10px;font-size:11px;font-weight:700;color:#fff;transition:.6s;min-width:30px}
 @media(max-width:900px){.stats-grid{grid-template-columns:1fr 1fr}.sidebar{width:180px}.main{margin-left:180px}}
 @media(max-width:640px){.sidebar{display:none}.main{margin-left:0}.stats-grid{grid-template-columns:1fr}}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important}
+  .sidebar,.topbar,button,.modal{display:none!important}
+  .main{margin:0!important;padding:0!important}
+  .content{padding:10px!important}
+  .page{display:none!important}
+  .page.print-active{display:block!important}
+  .section{box-shadow:none!important;border:1px solid #ddd!important;margin-bottom:14px!important;break-inside:avoid}
+  .section-header{background:#1B2A4A!important;color:#fff!important;-webkit-print-color-adjust:exact!important}
+  .section-header h2,.section-header h2 i{color:#fff!important}
+  .stat-cards,.stats-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+  .stat-card{border:1px solid #ddd!important;box-shadow:none!important;break-inside:avoid}
+  table{width:100%!important;border-collapse:collapse!important;font-size:11px!important}
+  th,td{border:1px solid #ccc!important;padding:4px 7px!important}
+  th{background:#1B2A4A!important;color:#fff!important}
+  .pointage-cell{width:18px!important;height:18px!important;font-size:9px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+  .print-header{display:block!important}
+  .badge,.alert{border:1px solid #ccc!important}
+}
+.print-header{display:none;text-align:center;margin-bottom:14px;padding-bottom:10px;border-bottom:3px solid #1B2A4A}
+.print-header .ph-logo{font-size:22px;font-weight:700;color:#1B2A4A;letter-spacing:1px}
+.print-header .ph-sub{font-size:12px;color:#555;margin:2px 0}
+.print-header .ph-page{font-size:14px;font-weight:600;color:#1B2A4A;margin-top:6px}
 </style>
 </head>
 <body>
@@ -152,6 +176,7 @@ textarea.form-control{resize:vertical}
     <div class="topbar-title" id="page-title">Tableau de bord</div>
     <div class="topbar-right">
       <button id="btn-install" class="btn btn-primary btn-sm" style="display:none" onclick="installApp()"><i class="ti ti-download"></i> Installer l'app</button>
+      <button class="btn btn-outline btn-sm" onclick="printPage()" title="Imprimer la page"><i class="ti ti-printer"></i> Imprimer</button>
       <span class="badge-dot"></span>
       <span style="font-size:12px;color:var(--text2)">Projet actif</span>
     </div>
@@ -160,6 +185,7 @@ textarea.form-control{resize:vertical}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div class="stats-grid">
         <div class="stat-card"><i class="ti ti-users icon"></i><div class="label">Employés</div><div class="value" id="stat-employes">0</div><div class="sub">Total enregistrés</div></div>
         <div class="stat-card"><i class="ti ti-cash icon"></i><div class="label">Masse salariale</div><div class="value" id="stat-salaire">0 DA</div><div class="sub">Par mois</div></div>
@@ -174,6 +200,7 @@ textarea.form-control{resize:vertical}
 
     <!-- EMPLOYES -->
     <div class="page" id="page-employes">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div class="section">
         <div class="section-header">
           <h2><i class="ti ti-users"></i> Liste des employés</h2>
@@ -190,6 +217,7 @@ textarea.form-control{resize:vertical}
 
     <!-- POINTAGE -->
     <div class="page" id="page-pointage">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div class="section">
         <div class="section-header">
           <h2><i class="ti ti-calendar-check"></i> Tableau de pointage</h2>
@@ -228,6 +256,7 @@ textarea.form-control{resize:vertical}
 
     <!-- CONTRAT -->
     <div class="page" id="page-contrat">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div class="section">
         <div class="section-header">
           <h2><i class="ti ti-file-invoice"></i> Contrat du projet</h2>
@@ -241,6 +270,7 @@ textarea.form-control{resize:vertical}
 
     <!-- PHASES -->
     <div class="page" id="page-phases">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
         <!-- Timeline -->
         <div class="section">
@@ -262,6 +292,7 @@ textarea.form-control{resize:vertical}
 
     <!-- MATERIAUX -->
     <div class="page" id="page-materiaux">
+      <div class="print-header"><div class="ph-logo">I.P.C.M BOUTEMA</div><div class="ph-sub">Entreprise industrielle production d'ensemble construction métallique — BLIDA</div><div class="ph-page" id="print-page-title"></div><div class="ph-sub" id="print-date"></div></div>
       <div class="section">
         <div class="section-header">
           <h2><i class="ti ti-package"></i> Matériaux du projet</h2>
@@ -847,6 +878,32 @@ function initYears(){
 loadData();
 initYears();
 renderEmployes(); renderContrat(); renderPhases(); renderMateriaux(); updateDashboard();
+
+// ===== IMPRESSION =====
+function printPage(){
+  // Get current active page
+  const activePage = document.querySelector('.page.active');
+  if(!activePage) return;
+
+  // Remove print-active from all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('print-active'));
+
+  // Add print-active to current page
+  activePage.classList.add('print-active');
+
+  // Set print header info
+  const title = document.getElementById('page-title').textContent;
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('fr-DZ') + ' à ' + now.toLocaleTimeString('fr-DZ', {hour:'2-digit',minute:'2-digit'});
+
+  activePage.querySelectorAll('#print-page-title').forEach(el => el.textContent = '📄 ' + title);
+  activePage.querySelectorAll('#print-date').forEach(el => el.textContent = 'Imprimé le ' + dateStr);
+
+  window.print();
+
+  // Cleanup
+  activePage.classList.remove('print-active');
+}
 
 // ===== PWA =====
 let deferredPrompt = null;
